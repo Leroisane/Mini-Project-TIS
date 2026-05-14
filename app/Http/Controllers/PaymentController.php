@@ -64,7 +64,7 @@ public function simulate(Request $request)
         try {
             $response = Http::post($ticketingWebhookUrl, [
                 'booking_id' => $payment->booking_id,
-                'payment_status' => $payment->status,
+                'status' => $payment->status,
                 'va_number' => $payment->va_number,
                 'paid_at' => $targetStatus === 'PAID' ? now()->toDateTimeString() : null,
             ]);
