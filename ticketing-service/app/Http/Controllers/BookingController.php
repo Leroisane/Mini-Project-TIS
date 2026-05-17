@@ -13,7 +13,7 @@ class BookingController extends Controller
     {
         // 1. Validasi Input (Aturan Maksimal 5 Tiket)
         $request->validate([
-            'event_id' => 'required|uuid',
+            'event_id' => 'required',
             'qty' => 'required|integer|min:1|max:5',
         ], [
             'qty.max' => 'Waduh, maksimal pembelian cuma boleh 5 tiket ya!',
@@ -41,7 +41,10 @@ class BookingController extends Controller
                 return response()->json(['message' => 'Maaf, stok tiket sisa ' . $stokTersedia], 400);
             }
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Gagal terhubung ke Layanan Katalog (Service A).'], 503);
+            return response()->json([
+                'message' => 'Gagal terhubung ke Layanan Katalog (Service A).',
+                'error' => $e->getMessage()
+            ], 503);
         }
 
         // 3. HITUNG TOTAL & GENERATE ID

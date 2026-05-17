@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $path = database_path('seeders/concert_tickets.sql');
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        if (file_exists($path)) {
+            \Illuminate\Support\Facades\DB::unprepared(file_get_contents($path));
+            $this->command->info('Concert tickets table seeded successfully from SQL file!');
+        } else {
+            $this->command->warn('SQL file not found. Please place concert_tickets.sql inside database/seeders/');
+        }
     }
 }
