@@ -71,18 +71,20 @@ Layanan ini sekarang berjalan di `http://127.0.0.1:8002`.
 Setelah ketiga service berjalan di port masing-masing (8000, 8001, dan 8002), Anda dapat melakukan simulasi dengan menggunakan tools seperti **Postman** atau **Insomnia**:
 
 1. **Lihat Katalog Event**: 
-   Kirim *GET request* ke Event Catalog Service (`http://127.0.0.1:8000/api/events`) untuk melihat daftar event dan tiket yang tersedia.
+   Kirim *GET request* ke Event Catalog Service (`http://127.0.0.1:8000/api/events`) untuk melihat daftar event dan tiket yang tersedia.\
+   *Pastikan untuk mengisi header Accept dengan application/json agar request berhasil.* \
    *Contoh:*
    ![events.png](events.png)
    
 2. **Buat Pesanan (Booking)**: 
-   Kirim *POST request* ke Ticketing Service (`http://127.0.0.1:8001/api/bookings`) dengan menyertakan ID event/tiket dari katalog. Ticketing service akan berkomunikasi dengan Event Catalog Service untuk memvalidasi tiket/stok, serta meminta nomor VA dari Payment Mock Service.
+   Kirim *POST request* ke Ticketing Service (`http://127.0.0.1:8001/api/bookings`) dengan menyertakan ID event/tiket dari katalog. Ticketing service akan berkomunikasi dengan Event Catalog Service untuk memvalidasi tiket/stok, serta meminta nomor VA dari Payment Mock Service.\
+   *Pastikan untuk mengisi header Accept dengan application/json agar request berhasil.* \
    *Contoh:*
-   ![booking.png](booking.png))
-   *Pastikan untuk mengisi header Accept dengan application/json agar request berhasil.* 
+   ![booking.png](booking.png)
+   
 
 3. **Proses Pembayaran**: 
-   Setelah booking berhasil dibuat, kirim *POST request* untuk pembayaran simulasi ke Payment Mock Service (`http://127.0.0.1:8002`) dengan menyertakan nomor VA dari booking sebelumnya. Status dapat diisi dengan "FAILED" jika ingin mensimulasikan gagal bayar atau dikosongkan jika ingin mensimulasikan berhasil.
+   Setelah booking berhasil dibuat, kirim *POST request* untuk pembayaran simulasi ke Payment Mock Service (`http://127.0.0.1:8002`) dengan menyertakan nomor VA dari booking sebelumnya. Status dapat diisi dengan "FAILED" jika ingin mensimulasikan gagal bayar atau dikosongkan jika ingin mensimulasikan berhasil.\
    *Contoh:*
    ![payment.png](payment.png)
 
